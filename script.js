@@ -1,24 +1,10 @@
 window.onload = function() {
 
     var type = "icon";
-    var rotation = false;
     var img = new Image();
 
     img.onload = function () {
         URL.revokeObjectURL(img.src);
-
-        var originalCanvas = document.createElement("canvas"),
-            originalctx = originalCanvas.getContext("2d");
-
-        originalCanvas.height = img.height;
-        originalCanvas.width = img.width;
-
-        if(img.width > img.height) rotation = true;
-
-        originalctx.drawImage(
-            img, 0, 0,
-            img.width, img.height
-        );
 
         var sizeArray = null;
         if(type == "icon") sizeArray = CONFIG_ICON;
@@ -26,62 +12,59 @@ window.onload = function() {
         else return;
 
         for(var i = 0; i < sizeArray.length; i++) {
-            var posX = 0,
-                posY = 0,
+            var posY = 0,
                 width = 0,
                 height = 0,
                 name = 0;
 
-            if(type == "icon") {
-                var multiplicator = sizeArray[i].substring(sizeArray[i].length-1);
-                width = sizeArray[i].substring(0, sizeArray[i].length-2) * multiplicator;
+            name = sizeArray[i].name;
+            width = sizeArray[i].width;
+
+            if(type == "icon") height = width;
+            else if(type = "splash") height = sizeArray[i].height;
+
+            var canvas = document.createElement("canvas"),
+                ctx = canvas.getContext("2d");
+
+            canvas.width = width;
+            canvas.height = height;
+
+            // If the image is in portrait sens
+            if(height > width) {
+                console.log("ROTATE!");
+                ctx.translate(width/2, height/2);
+                ctx.rotate(90 * Math.PI/180);
+
+                var temp = height;
                 height = width;
+                width = temp;
 
-                name = sizeArray[i];
-                if(multiplicator == 1) name = name.substring(0, name.length-2);
-            }
-            else if(type = "splash") {
-                name = sizeArray[i].name;
-
-                if(rotation) {
-                    width = sizeArray[i].height;
-                    height = sizeArray[i].width;
-                    var ratio = originalCanvas.height / originalCanvas.width;
-                    var marge = height - width * ratio;
-                    posY = Math.round(marge / 2);
-                }
-                else {
-                    width = sizeArray[i].width;
-                    height = sizeArray[i].height;
-                    var ratio = originalCanvas.height / originalCanvas.width;
-                    var marge = height - width * ratio;
-                    posY = Math.round(marge / 2);
-                }
+                ctx.translate(-width/2, -height/2);
             }
 
-            var resizedCanvas = document.createElement("canvas"),
-                resizedctx = resizedCanvas.getContext("2d");
+            // If it's a splash scree, maybe we need to add border, to keep the image aspect / ratio
+            if(type == "splash") {
+                var ratio = img.height / img.width;
+                var marge = height - width * ratio;
+                posY = Math.round(marge / 2);
 
-            resizedCanvas.width = width;
-            resizedCanvas.height = height;
-            resizedctx.drawImage(
-                img, posX, posY,
-                width - posX*2, height - posY*2
+                ctx.beginPath();
+                ctx.rect(0, 0, width, posY);
+                ctx.rect(0, height - posY, width, posY);
+                ctx.fillStyle = "#000000";
+                ctx.fill();
+            }
+
+            // Draw the image
+            ctx.drawImage(
+                img, 0, posY,
+                width, height - posY*2
             );
-            resizedctx.beginPath();
-            if(rotation) {
-                resizedctx.rect(0, 0, width, posY);
-                resizedctx.rect(0, height - posY, width, posY);
-            }
-            else {
-                resizedctx.rect(0, 0, posX, height);
-                resizedctx.rect(width - posX, 0, posX, height);
-            }
-            resizedctx.fillStyle = "#000000";
-            resizedctx.fill();
 
+            // Then, download the image
             var download = document.createElement("a");
-            download.href = resizedCanvas.toDataURL();
+            if(width > 1024 || height > 1024) download.href = canvas.toDataURL('image/jpeg', 0.8);
+            else download.href = canvas.toDataURL('image/png', 1.0);
             download.download = name + ".png";
 
             download.click();
