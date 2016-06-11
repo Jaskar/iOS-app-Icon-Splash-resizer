@@ -4,11 +4,17 @@ window.onload = function() {
     var img = new Image();
 
     img.onload = function () {
-        URL.revokeObjectURL(img.src);
-
         var sizeArray = null;
-        if(type == "icon") sizeArray = CONFIG_ICON;
-        else if(type == "splash") sizeArray = CONFIG_SPLASH;
+        if(type == "icon") {
+            sizeArray = CONFIG_ICON;
+            document.getElementById("dropBoxIconPreview").src = img.src;
+            document.getElementById("dropBoxIconPreview").style.visibility = "visible";
+        }
+        else if(type == "splash") {
+            sizeArray = CONFIG_SPLASH;
+            document.getElementById("dropBoxSplashPreview").src = img.src;
+            document.getElementById("dropBoxSplashPreview").style.visibility = "visible";
+        }
         else return;
 
         for(var i = 0; i < sizeArray.length; i++) {
@@ -69,16 +75,21 @@ window.onload = function() {
 
             download.click();
         }
+
+        if(type == "icon") document.getElementById("iconLoader").style.visibility = "hidden";
+        else if(type = "splash") document.getElementById("splashLoader").style.visibility = "hidden";
     };
 
     var dropBoxIcon = document.getElementById("dropBoxIcon");
     dropBoxIcon.onchange = function(event) {
+        document.getElementById("iconLoader").style.visibility = "visible";
         type = "icon";
         img.src = URL.createObjectURL(dropBoxIcon.files[0]);
     };
 
     var dropBoxSplash = document.getElementById("dropBoxSplash");
     dropBoxSplash.onchange = function(event) {
+        document.getElementById("splashLoader").style.visibility = "visible";
         type = "splash";
         img.src = URL.createObjectURL(dropBoxSplash.files[0]);
     };

@@ -10,13 +10,29 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <br>
-    <label for="dropBoxIcon">Import an icon -> 2048*2048 or 1024*1024</label><br>
-    <input id="dropBoxIcon" type="file"/>
-    <br>
-    <br>
-    <label for="dropBoxSplash">Import a splashscreen -> 4000*2250</label><br>
-    <input id="dropBoxSplash" type="file"/>
-
+    <div id="rootDropBoxDiv">
+        <div id="dropBoxIconDiv" class="dropBoxDiv">
+            <input id="dropBoxIcon" type="file"/>
+            <div class="dropBoxText">Import an icon -> 2048*2048 or 1024*1024</div>
+            <img id="dropBoxIconPreview" src="#">
+            <div class="cssload-thecube" id="iconLoader">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
+            </div>
+        </div>
+        <div id="dropBoxSplashDiv" class="dropBoxDiv">
+            <input id="dropBoxSplash" type="file"/>
+            <div class="dropBoxText">Import a splashscreen -> 4000*2250</div>
+            <img id="dropBoxSplashPreview" src="#">
+            <div class="cssload-thecube" id="splashLoader">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
