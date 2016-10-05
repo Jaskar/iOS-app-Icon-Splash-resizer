@@ -1,4 +1,16 @@
 var CONFIG_ICON = [
+	{
+        name:"Icon-20",
+        width:20
+    },
+	{
+        name:"Icon-20@2x",
+        width:40
+    },
+	{
+        name:"Icon-20@3x",
+        width:60
+    },
     {
         name:"Icon-29",
         width:29
@@ -45,11 +57,11 @@ var CONFIG_ICON = [
     },
     {
         name:"Icon-60@2x",
-        width:60
+        width:120
     },
     {
         name:"Icon-60@3x",
-        width:60
+        width:180
     },
     {
         name:"Icon-72",
@@ -57,7 +69,7 @@ var CONFIG_ICON = [
     },
     {
         name:"Icon-72@2x",
-        width:72
+        width:144
     },
     {
         name:"Icon-76",
@@ -65,7 +77,7 @@ var CONFIG_ICON = [
     },
     {
         name:"Icon-76@2x",
-        width:76
+        width:152
     },
     {
         name:"Icon-83.5@2x",
@@ -75,52 +87,52 @@ var CONFIG_ICON = [
 
 var CONFIG_SPLASH = [
     {
-        name:"Splash-320_480",
+        name:"Splash-320_480-1x",
         width:320,
         height:480
     },
     {
-        name:"Splash-640_960",
+        name:"Splash-640_960-2x",
         width:640,
         height:960
     },
     {
-        name:"Splash-640_1136",
+        name:"Splash-640_1136-Retina4",
         width:640,
         height:1136
     },
     {
-        name:"Splash-750_1334",
+        name:"Splash-750_1334-HD4.7",
         width: 750,
         height: 1334
     },
     {
-        name:"Splash-768_1024",
+        name:"Splash-768_1024-iPad_1x",
         width: 768,
         height: 1024
     },
     {
-        name:"Splash-1024_768",
+        name:"Splash-1024_768-iPad_Landscape_1x",
         width: 1024,
         height: 768
     },
     {
-        name:"Splash-1242_2208",
+        name:"Splash-1242_2208-HD5.5",
         width: 1242,
         height: 2208
     },
     {
-        name:"Splash-1536_2048",
+        name:"Splash-1536_2048-iPad_2x",
         width: 1536,
         height: 2048
     },
     {
-        name:"Splash-2048_1536",
+        name:"Splash-2048_1536-Landscape_2x",
         width: 2048,
         height: 1536
     },
     {
-        name:"Splash-2208_1242",
+        name:"Splash-2208_1242-HD5.5_Landscape",
         width: 2208,
         height: 1242
     }
